@@ -1,0 +1,150 @@
+/* Portafolio minimalista - tema oscuro */
+:root {
+  color-scheme: dark;
+  color: #c9d1d9;
+  background: #0d1117;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, rgba(63, 132, 202, 0.12), transparent 28%),
+    linear-gradient(180deg, #111827 0%, #0d1117 100%);
+  color: #c9d1d9;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+.page {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.header {
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.header-title {
+  margin: 0;
+  font-size: clamp(2.8rem, 4vw, 4.4rem);
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.header-subtitle {
+  margin: 1rem 0 0;
+  color: #8b949e;
+  font-size: 1.1rem;
+}
+
+.header-description {
+  margin: 1.6rem 0 0;
+  color: #adbac7;
+  max-width: 42rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: #161b22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  padding: 1.7rem;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 20px 50px rgba(6, 12, 24, 0.28);
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(88, 166, 255, 0.3);
+  box-shadow: 0 24px 70px rgba(12, 24, 48, 0.38);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 0.9rem;
+  background: rgba(88, 166, 255, 0.14);
+  color: #58a6ff;
+  font-size: 1.2rem;
+}
+
+.card-label {
+  margin: 0;
+  color: #adbac7;
+  font-size: 0.95rem;
+}
+
+.card-link {
+  margin-top: 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #58a6ff;
+}
+
+.card-link::after {
+  content: "→";
+  margin-left: 0.55rem;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .card-link::after,
+.card:focus-within .card-link::after {
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 2rem 0 3rem;
+  }
+
+  .header-title {
+    font-size: 2.6rem;
+  }
+}
