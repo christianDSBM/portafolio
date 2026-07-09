@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarea 3 | Evidencias</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  
+  <style>
+    /* Estilos específicos para el carrusel */
+    .carousel-container {
+      position: relative;
+      max-width: 900px;
+      margin: 2rem auto;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .carousel-slide {
+      display: none; /* Oculta todas las imágenes por defecto */
+      text-align: center;
+      padding-bottom: 20px; /* Espacio para la descripción */
+    }
+
+    /* Imagen en grande y responsiva */
+    .carousel-slide img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain; 
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Estilo para las descripciones tipo libro (Captions) */
+    .caption {
+      color: #dddddd;
+      font-style: italic;
+      font-size: 0.95rem;
+      padding: 15px 40px;
+      margin: 0;
+      background-color: #2a2a2a;
+      border-top: 1px solid #444;
+      line-height: 1.4;
+    }
+
+    .caption b {
+      color: #4CAF50;
+      font-style: normal;
+    }
+
+    /* Botones de navegación (Flechas) */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 45%; /* Ligeramente más arriba para compensar el texto */
+      transform: translateY(-50%);
+      width: auto;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      background-color: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 0 4px 4px 0;
+      user-select: none;
+      transition: 0.3s ease;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    /* Botón para regresar al inicio */
+    .back-btn-container {
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50; 
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .back-btn:hover {
+      background-color: #45a049;
+    }
+
+    /* Contenedor del texto del reporte */
+    .report-summary {
+      max-width: 900px;
+      margin: 0 auto 2rem auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+      border-left: 5px solid #4CAF50;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="header">
+      <h1 class="header-title">Evidencias: Tarea 3</h1>
+      <p class="header-subtitle">Galería de pruebas del funcionamiento</p>
+    </section>
+
+    <section class="report-summary">
+      <p>Por medio de un trigger configurado en S3, al recibir un evento de creación de objeto, el sistema detecta la carga de un archivo en el bucket <strong>xideralaws-curso-christiansolis2026</strong>. Si el archivo subido se llama exactamente <code>titanic.csv</code>, se activa una función Lambda que extrae la información y procede a realizar la limpieza de los datos. Posteriormente, la función genera y almacena en el mismo bucket un nuevo archivo procesado llamado <code>titanic_limpio.csv</code>. En caso de que el archivo cargado tenga cualquier otro nombre, la Lambda finaliza su ejecución sin procesar los datos.</p>
+    </section>
+
+    <div class="carousel-container">
+      
+      <div class="carousel-slide">
+        <img src="../assets/Lambda-NewData.png" alt="Código NewData">
+        <p class="caption"><b>Figura 1. Lambda-NewData:</b> Se muestra el código encargado de validar la existencia del archivo en S3, cargarlo en memoria y aplicar la limpieza inicial eliminando duplicados y valores nulos.</p>
+      </div>
+
+      <div class="carousel-slide">
+        <img src="../assets/Lambda-LambdaFunction.png" alt="Código LambdaFunction">
+        <p class="caption"><b>Figura 2. Lambda-LambdaFunction:</b> Se muestra el código orquestador que intercepta el evento del trigger, valida que el archivo sea estrictamente el objetivo y coordina el flujo entre la lectura y la escritura.</p>
+      </div>
+
+      <div class="carousel-slide">
+        <img src="../assets/Lambda-CleanData.png" alt="Código CleanData">
+        <p class="caption"><b>Figura 3. Lambda-CleanData:</b> Se muestra el código responsable de recibir el DataFrame procesado, convertirlo a formato CSV en memoria y escribirlo de regreso en el bucket de S3.</p>
+      </div>
+      
+      <div class="carousel-slide">
+        <img src="../assets/Lambda-BucketVacio.png" alt="Bucket sin procesar">
+        <p class="caption"><b>Figura 4. Lambda-BucketVacío:</b> Se comprueba el estado inicial del entorno, donde se muestra que el bucket únicamente contiene un archivo distinto a titanic.csv.</p>
+      </div>
+
+      <div class="carousel-slide">
+        <img src="../assets/Lambda-Unknown.png" alt="Prueba de archivo ignorado">
+        <p class="caption"><b>Figura 5. Lambda-Unknown:</b> Evidencia del filtro de seguridad; se añade un archivo "Unknown.pdf" al bucket, el cual es ignorado exitosamente por la Lambda sin generar acciones.</p>
+      </div>
+
+      <div class="carousel-slide">
+        <img src="../assets/Lambda-Success.png" alt="Prueba exitosa">
+        <p class="caption"><b>Figura 6. Lambda-Success:</b> Ejecución exitosa. Se añade "titanic.csv" y se observa cómo la Lambda genera y guarda automáticamente el archivo de salida "titanic_limpio.csv".</p>
+      </div>
+
+      <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+      <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <div class="back-btn-container">
+      <a href="../index.html" class="back-btn">⬅ Regresar al inicio</a>
+    </div>
+
+  </main>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+
+    function showSlide(index) {
+      if (index >= slides.length) { slideIndex = 0; }
+      if (index < 0) { slideIndex = slides.length - 1; }
+      
+      slides.forEach(slide => {
+        slide.style.display = "none";
+      });
+      
+      slides[slideIndex].style.display = "block";
+    }
+
+    function changeSlide(n) {
+      slideIndex += n;
+      showSlide(slideIndex);
+    }
+
+    showSlide(slideIndex);
+  </script>
+</body>
+</html>
